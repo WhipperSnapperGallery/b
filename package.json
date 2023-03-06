@@ -1,0 +1,28 @@
+{
+  "name": "b",
+  "version": "1.0.0",
+  "description": "ODFR Website by B Wijshijer",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile:sass": "sass sass:assets/css",
+    "bundle": "npx webpack --config .webpack/webpack.config.js "
+  },
+  "keywords": [
+    "odfr",
+    "b",
+    "love",
+    "on-display-for-review"
+  ],
+  "author": "omar_musleh",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.58.3",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "requirejs": "^2.3.6",
+    "webpack": "^5.75.0"
+  }
+}
