@@ -1,0 +1,88 @@
+$rots: 50deg
+
+@mixin carousel_item($ord, $zi, $ry, $op, $w, $curs) 
+  order: $ord
+  z-index: $zi
+  rotate: y $ry
+  opacity: $op
+  width: $w
+  height: 100%
+  cursor: #{$curs} !important
+  
+#main-carousel
+  margin-top: 10vh
+  width: 95vw
+  height: 70vh
+  perspective: 80vw
+  position: relative
+  
+.carouselement
+  border: 4px solid #000
+  background-color: green
+  height: 100%
+  transform-style: preserve-3d
+  transition: all 0.5s ease-in-out
+  will-change: rotate, order, z-index, width, opacity
+  
+.carousel-selected
+  @include carousel_item($ord: 3, $zi: 3, $ry: 0 ,$op: 1, $w: 35%, $curs: pointer)
+
+.carousel-next
+  @include carousel_item($ord: 4, $zi: 2, $ry: -$rots ,$op: 1, $w: 17.5%, $curs: default)
+  margin-left: -2vw
+
+.carousel-prev
+  @include carousel_item($ord: 2, $zi: 2, $ry: $rots ,$op: 1, $w: 17.5%, $curs: default)
+  margin-right: -2vw
+
+.carousel-next-next
+  @include carousel_item($ord: 5, $zi: 1, $ry: -$rots ,$op: 1, $w: 10%, $curs: default)
+  margin-left: -4vw
+
+.carousel-prev-prev
+  @include carousel_item($ord: 1, $zi: 1, $ry: $rots ,$op: 1, $w: 10%, $curs: default)
+  margin-right: -4vw
+
+.carousel-hidden-left
+  opacity: 0
+  z-index: 0
+  order: 0
+  width: 5%
+  rotate: y 50deg
+  margin-right: -4vw
+
+.carousel-hidden-right
+  opacity: 0
+  z-index: 0
+  order: 6
+  width: 5%
+  rotate: y -50deg
+  margin-left: -4vw
+
+.hover-ctrl
+  margin-left: 5rem
+  float: left
+  z-index: 10
+  will-change: opacity
+  transition: opacity 0.2s ease-in-out
+  position: absolute
+  top: 10%
+  left: 55%
+  transform: translate(-50%, -50%)
+
+.hover-ctrl-hidden
+  opacity: 0
+
+.hover-ctrl-reveal
+  opacity: 1
+
+.ctrl-btn
+  z-index: inherit
+
+.embed-responsive-item
+  width: 60vw
+  height: 60vh
+
+.vid-player
+  max-width: 100%
+  height: 56.25%

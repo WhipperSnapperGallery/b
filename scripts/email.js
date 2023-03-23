@@ -65,26 +65,25 @@ window.addEventListener('DOMContentLoaded', event => {
             msg.addClass('d-none');
         }, 3000);
     }
-
-    //Contact Form Submit
-    //Also uses jQuery syntax.
-    $('#submitButton').on('click', () => {
-        let sendName = $('#sendName').val();
-        let sendEmail = $('#sendEmail').val();
-        let sendPhone = $('#sendPhone').val();
-        let messageBody = $('#messageBody').val();
-        sendMail(sendName, sendEmail, sendPhone, messageBody).then(value => {
-            if (value === 'OK') {
-                showSubmitted();
-                sendConfirmation(sendName, sendEmail);
-                $('#sendName').val("");
-                $('#sendEmail').val("");
-                $('#sendPhone').val("");
-                $('#messageBody').val("");
-            }
-            else {
-                showFailed();
-            }
-        });
-    });
 });
+
+//Contact Form Submit
+$('#submitButton').on('click', () => {
+    let sendName = $('#sendName').val();
+    let sendEmail = $('#sendEmail').val();
+    let sendPhone = $('#sendPhone').val();
+    let messageBody = $('#messageBody').val();
+    sendMail(sendName, sendEmail, sendPhone, messageBody).then(value => {
+      if (value === 'OK') {
+        showSubmitted();
+        sendConfirmation(sendName, sendEmail);
+        $('#sendName').val("");
+        $('#sendEmail').val("");
+        $('#sendPhone').val("");
+        $('#messageBody').val("");
+      }
+      else {
+        showFailed();
+      }
+    });
+  });

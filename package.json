@@ -17,11 +17,13 @@
   "author": "omar_musleh",
   "license": "ISC",
   "devDependencies": {
+    "node-libs-browser": "^2.2.1",
     "sass": "^1.58.3",
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "requirejs": "^2.3.6",
     "webpack": "^5.75.0"
   }
