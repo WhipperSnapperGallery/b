@@ -1,3 +1,8 @@
+const filePath = '/assets/vid/links.txt';
+const videoPlayers = [];
+let currentPlayers = 0;
+let numPlayers = 0;
+
 //carousel control stuff
 function setCarouselements(elems) {
   let middle = Math.floor(elems.length / 2);
@@ -42,16 +47,46 @@ function hideButtons() {
   buttons.addClass("hover-ctrl-hidden");
 }
 
+const stopCurrentVideo = elem => {
+  let target = elem.find(".vid-player");
+  let id = parseInt(target.attr("id").slice(-1));
+  console.log(id);
+  console.log(videoPlayers);
+  console.log(JSON.stringify(videoPlayers[id]));
+  videoPlayers[id].pauseVideo();
+}
+
+const startCurrentVideo = elem => {
+  let target = elem.find(".vid-player");
+  let id = parseInt(target.attr("id").slice(-1));
+  console.log("Playing current video...");
+  console.log(JSON.stringify(videoPlayers[id]));
+  videoPlayers[0].playVideo();
+}
+
+function stopButtonFunc() {
+  let tgt = $(".carousel-selected");
+  let btn = $(".btn-stop");
+  stopCurrentVideo(tgt);
+  btn.off("click");
+  btn.click(startButtonFunc);
+  btn.html("Start");
+}
+
+function startButtonFunc () {
+  let tgt = $(".carousel-selected");
+  startCurrentVideo(tgt);
+  btn.off("click");
+  btn.click(stopButtonFunc);
+  btn.html("Stop");
+}
+
 function goToNext(elems) {
   let oldSelected = $(".carousel-selected");
   let newSelected = $(".carousel-next");
   oldSelected.off("hover");
-  console.log("Previous list:");
-  console.log(elems);
   let movedElem = elems.shift();
   elems.push(movedElem);
-  console.log("Post list:");
-  console.log(elems);
   setCarouselements(elems);
   newSelected.hover(revealButtons, hideButtons);
 }
@@ -60,43 +95,52 @@ function goToPrevious(elems) {
   let oldSelected = $(".carousel-selected");
   let newSelected = $(".carousel-prev");
   oldSelected.off("hover");
-  console.log("Previous list:");
-  console.log(elems);
   let movedElem = elems.pop();
   elems.unshift(movedElem);
-  console.log("Post list:");
-  console.log(elems);
   setCarouselements(elems);
   newSelected.hover(revealButtons, hideButtons);
 }
 
-const filePath = '/assets/vid/links.txt';
-const videoPlayers = []
 
-const createNewPlayer = (id, videoId) => {
+const createNewPlayer = (id) => {
   videoPlayers[id] = new YT.Player(`player${id}`, {
-    videoId: videoId,
-    playerVars: {
-      'playsinline': 1,
-      'controls': 0,
-      'enablejsapi': 1,
-      'fs': 0,
-      'iv_load_policy': 3,
-      'modestbranding': 1
+//     videoId: videoId,
+//     playerVars: {
+//       'playsinline': 1,
+//       'controls': 0,
+//       'enablejsapi': 1,
+//       'fs': 0,
+//       'iv_load_policy': 3,
+//       'modestbranding': 1
+//     },
+    events: {
+      'onReady': onPlayerReady,
     }
   });
+//   $(`#player${id}`).attr("width", "100%");
+//   $(`#player${id}`).attr("height", "56.5%");
 }
 
-const buildCarouselementAndAddIt = id => {
-  const newElem = `<div class="carouselement" width="100%" height="100%">
-        <div class="vid-player" id="player${id}" width="800px" height="800px"></div>
+function onPlayerReady() {
+  if (currentPlayers === numPlayers)
+    startCurrentVideo($(".carousel-selected"));
+  else currentPlayers++;
+  console.log("Player ready!")
+  // console.table(event.target);
+  // event.target.playVideo();
+}
+
+function buildCarouselementAndAddIt(id, videoId) {
+  const newElem = `<div class="carouselement">
+        <iframe class="vid-player" id="player${id}" type="text/html" width="100%" height="100%"
+          src="https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&disablekb=1&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&iv_load_policy=3"
+          frameborder="0">
     </div>`;
   const carouselContainer = $("#main-carousel");
   carouselContainer.html(carouselContainer.html() + newElem);
 }
 
 function getLinks(callback) {
-  console.log("Whaddup");
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     const text = xhr.responseText;
@@ -108,16 +152,15 @@ function getLinks(callback) {
 }
 
 function setupPlayers(text) {
-  console.log("Hello!");
   let links = text.split("\n");
+  numPlayers = links.length;
   // Loop through each line and create new players
   for (const [i, line] of links.entries()) {
     if (line.trim().indexOf("youtube") > -1) {
       const parts = line.split('?v=');
       const videoId = parts[1].split('&')[0];
-      buildCarouselementAndAddIt(i);
-      createNewPlayer(i, videoId);
-      console.log(line);
+      buildCarouselementAndAddIt(i, videoId);
+      createNewPlayer(i);
     }
   }
   let carouselements = $(".carouselement").toArray();
@@ -126,7 +169,10 @@ function setupPlayers(text) {
   $(".hover-ctrl").hover(revealButtons);
   $("#btn-next").on("click", () => {goToNext(carouselements);});
   $("#btn-prev").on("click", () => {goToPrevious(carouselements)});
+  $("#btn-stop").on("click", stopButtonFunc);
+  // startCurrentVideo($(".carousel-selected"));
 }
+
 
 //Function to create the iFrames
 function onYouTubeIframeAPIReady() {
