@@ -7,9 +7,7 @@
 }
 
 .carouselement {
-  border: 4px solid #000;
-  background-color: green;
-  height: 100%;
+  height: 56%;
   transform-style: preserve-3d;
   transition: all 0.5s ease-in-out;
   will-change: rotate, order, z-index, width, opacity;
@@ -118,7 +116,7 @@
 
 .vid-player {
   max-width: 100%;
-  height: 56.25%;
+  height: 100%;
 }
 
 /*# sourceMappingURL=index.css.map */
