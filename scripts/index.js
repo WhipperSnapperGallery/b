@@ -133,7 +133,7 @@ function onPlayerReady() {
 function buildCarouselementAndAddIt(id, videoId) {
   const newElem = `<div class="carouselement">
         <iframe class="vid-player" id="player${id}" type="text/html" width="100%" height="100%"
-          src="https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&disablekb=1&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&iv_load_policy=3"
+          src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=0&disablekb=1&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&iv_load_policy=3"
           frameborder="0">
     </div>`;
   const carouselContainer = $("#main-carousel");
