@@ -1,39 +1,8 @@
 const filePath = '/assets/vid/links.txt';
-const videoPlayers = [];
+const videoIds = [];
 let currentPlayers = 0;
 let numPlayers = 0;
 
-//carousel control stuff
-function setCarouselements(elems) {
-  let middle = Math.floor(elems.length / 2);
-  for (const [index, elem] of elems.entries()) {
-      elem.className = "carouselement";
-      switch (index) {
-          case middle:
-              elem.classList.add("carousel-selected");
-              break;
-          case middle - 1:   
-              elem.classList.add("carousel-prev");
-              break;
-          case middle - 2:
-              elem.classList.add("carousel-prev-prev");
-              break;
-          case middle + 1:
-              elem.classList.add("carousel-next");
-              break;
-          case middle + 2:
-              elem.classList.add("carousel-next-next");
-              break;
-          default:
-              if (index < middle - 2) {
-                  elem.classList.add("carousel-hidden-left");
-              }
-              if (index > middle + 2) {
-                  elem.classList.add("carousel-hidden-right");
-              }
-      }
-  }
-}
 
 function revealButtons() {
   const buttons = $(".ctrl-buttons");

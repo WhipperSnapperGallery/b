@@ -1,122 +1,14 @@
-#main-carousel {
-  margin-top: 10vh;
-  width: 95vw;
-  height: 70vh;
-  perspective: 80vw;
-  position: relative;
-}
-
-.carouselement {
-  height: 56%;
-  transform-style: preserve-3d;
-  transition: all 0.5s ease-in-out;
-  will-change: rotate, order, z-index, width, opacity;
-}
-
-.carousel-selected {
-  order: 3;
-  z-index: 3;
-  rotate: y 0;
-  opacity: 1;
-  width: 35%;
-  height: 100%;
-  cursor: pointer !important;
-}
-
-.carousel-next {
-  order: 4;
-  z-index: 2;
-  rotate: y -50deg;
-  opacity: 1;
-  width: 17.5%;
-  height: 100%;
-  cursor: default !important;
-  margin-left: -2vw;
-}
-
-.carousel-prev {
-  order: 2;
-  z-index: 2;
-  rotate: y 50deg;
-  opacity: 1;
-  width: 17.5%;
-  height: 100%;
-  cursor: default !important;
-  margin-right: -2vw;
-}
-
-.carousel-next-next {
-  order: 5;
-  z-index: 1;
-  rotate: y -50deg;
-  opacity: 1;
-  width: 10%;
-  height: 100%;
-  cursor: default !important;
-  margin-left: -4vw;
-}
-
-.carousel-prev-prev {
-  order: 1;
-  z-index: 1;
-  rotate: y 50deg;
-  opacity: 1;
-  width: 10%;
-  height: 100%;
-  cursor: default !important;
-  margin-right: -4vw;
-}
-
-.carousel-hidden-left {
-  opacity: 0;
-  z-index: 0;
-  order: 0;
-  width: 5%;
-  rotate: y 50deg;
-  margin-right: -4vw;
-}
-
-.carousel-hidden-right {
-  opacity: 0;
-  z-index: 0;
-  order: 6;
-  width: 5%;
-  rotate: y -50deg;
-  margin-left: -4vw;
-}
-
-.hover-ctrl {
-  margin-left: 5rem;
-  float: left;
-  z-index: 10;
-  will-change: opacity;
-  transition: opacity 0.2s ease-in-out;
-  position: absolute;
-  top: 10%;
-  left: 55%;
-  transform: translate(-50%, -50%);
-}
-
-.hover-ctrl-hidden {
-  opacity: 0;
-}
-
-.hover-ctrl-reveal {
-  opacity: 1;
-}
-
-.ctrl-btn {
-  z-index: inherit;
-}
-
-.embed-responsive-item {
-  width: 60vw;
-  height: 60vh;
+.vid-container {
+  display: flex;
+  justify-content: center;
+  min-width: 99vw;
+  height: 99vh;
 }
 
 .vid-player {
-  max-width: 100%;
-  height: 100%;
+  width: 80%;
 }
 
-/*# sourceMappingURL=index.css.map */
+#next-btn {
+  display: none;
+}/*# sourceMappingURL=index.css.map */
