@@ -72,7 +72,7 @@ function goToPrevious(elems) {
 
 
 const createNewPlayer = (id) => {
-  videoPlayers[id] = new YT.Player(`player${id}`, {
+  videoPlayers[`player${id}`] = new YT.Player(`player${id}`, {
 //     videoId: videoId,
 //     playerVars: {
 //       'playsinline': 1,
