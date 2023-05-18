@@ -52,7 +52,6 @@ function nextVideo() {
     currentVid = (currentVid + 1) % videoIds.length;
     const nextPlayer = next.children('div').children('iframe')
     nextPlayer.attr("src", `https://www.youtube-nocookie.com/embed/${videoIds[currentVid]}?controls=0&disablekb=1&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&iv_load_policy=3`);
-    videoPlayers[nextPlayer.attr('id')].playVideo();
 }
 
 function previousVideo() {
@@ -64,13 +63,18 @@ function previousVideo() {
     currentVid = (currentVid - 1) < 0 ? videoIds.length - 1 : currentVid - 1;
     const nextPlayer = next.children('div').children('iframe')
     nextPlayer.attr("src", `https://www.youtube-nocookie.com/embed/${videoIds[currentVid]}?controls=0&disablekb=1&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&iv_load_policy=3`);
-    videoPlayers[nextPlayer.attr('id')].playVideo();
 }
 
 function stopLastVideo() {
     last = currentCarousel === "carousel0" ? $("#carousel1") : $("#carousel0");
     const videoPlayer = last.children('div').children('iframe').attr('id');
     videoPlayers[videoPlayer].stopVideo();
+}
+
+function stopCurrentVideo() {
+    const current = $(`#${currentCarousel}`);
+    const videoPlayer = current.children('div').children('iframe').attr('id');
+    videoPlayers[videoPlayer].pauseVideo();
 }
 
 function onPlayerReady() {
@@ -97,6 +101,6 @@ $(document).ready(() => {
 
     $('#main-carousel').on('slid.bs.carousel', function () {
         console.log("Stopping again!")
-        // stopLastVideo();
+        stopLastVideo();
     });
 });
