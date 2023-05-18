@@ -1,39 +1,8 @@
 const filePath = '/assets/vid/links.txt';
-const videoPlayers = [];
+const videoIds = [];
 let currentPlayers = 0;
 let numPlayers = 0;
 
-//carousel control stuff
-function setCarouselements(elems) {
-  let middle = Math.floor(elems.length / 2);
-  for (const [index, elem] of elems.entries()) {
-      elem.className = "carouselement";
-      switch (index) {
-          case middle:
-              elem.classList.add("carousel-selected");
-              break;
-          case middle - 1:   
-              elem.classList.add("carousel-prev");
-              break;
-          case middle - 2:
-              elem.classList.add("carousel-prev-prev");
-              break;
-          case middle + 1:
-              elem.classList.add("carousel-next");
-              break;
-          case middle + 2:
-              elem.classList.add("carousel-next-next");
-              break;
-          default:
-              if (index < middle - 2) {
-                  elem.classList.add("carousel-hidden-left");
-              }
-              if (index > middle + 2) {
-                  elem.classList.add("carousel-hidden-right");
-              }
-      }
-  }
-}
 
 function revealButtons() {
   const buttons = $(".ctrl-buttons");
@@ -103,7 +72,7 @@ function goToPrevious(elems) {
 
 
 const createNewPlayer = (id) => {
-  videoPlayers[id] = new YT.Player(`player${id}`, {
+  videoPlayers[`player${id}`] = new YT.Player(`player${id}`, {
 //     videoId: videoId,
 //     playerVars: {
 //       'playsinline': 1,
@@ -133,7 +102,7 @@ function onPlayerReady() {
 function buildCarouselementAndAddIt(id, videoId) {
   const newElem = `<div class="carouselement">
         <iframe class="vid-player" id="player${id}" type="text/html" width="100%" height="100%"
-          src="https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&disablekb=1&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&iv_load_policy=3"
+          src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=0&disablekb=1&enablejsapi=1&fs=0&modestbranding=1&playsinline=1&iv_load_policy=3"
           frameborder="0">
     </div>`;
   const carouselContainer = $("#main-carousel");
