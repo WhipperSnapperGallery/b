@@ -14,7 +14,7 @@ Follow these instructions in order to run the website on your own local machine.
 3. In VS Code, select File > Open Folder
 4. Navigate to wherever you unzipped the file and single-click on the folder named "b", then select "select folder"
 
-## Step 4: Prepare and run the project:
+## Step 3: Prepare and run the project:
 1. In the top left menu list, select Terminal > New Terminal
 2. In the window that pops up at the bottom, type 'npm install' (without the quotation marks) and press enter
 3. Click on and open the file named index.html
