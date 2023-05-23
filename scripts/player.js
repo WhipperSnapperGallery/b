@@ -1,3 +1,5 @@
+let basicMessage = "";
+
 const filePath = '/assets/vid/links.txt';
 const videoIds = [];
 const videoPlayers = [];
@@ -27,7 +29,6 @@ function setupLinks() {
         }
     });
 }
-
 
 function createPlayers() {
     console.log(videoIds)
@@ -83,13 +84,15 @@ function onPlayerReady() {
 }
 
 function onYouTubeIframeAPIReady() {
-    console.log("Hello!")
     setupLinks();
 }
 
 $(document).ready(() => {
+    const sessionID = uuidv4();
+
+    window.addEventListener("load", () => {basicMessage = $("#chatbox").html()})
+
     $('#main-carousel').on('slide.bs.carousel', function (e) {
-        console.log("Hello again!")
         if (e.direction == "left") {
             nextVideo();
         }
@@ -98,11 +101,21 @@ $(document).ready(() => {
         }
     });
 
+
+
     $('#main-carousel').on('slid.bs.carousel', function () {
         stopLastVideo();
         // Reset the chatbox
-        let firstMessage = "Are you in love?";
-        $("#chatbox").html(`<p class="botText"><span class=uText-label>Them:&nbsp;</span><span> ${firstMessage} </span></p>`);
+        console.log($("#chatbox").html() === basicMessage);
+        console.log($("#chatbox").html());
+        console.log(basicMessage);
+        if ($("#chatbox").html() !== basicMessage) {
+            sendEmail(sessionID, $("#chatbox").html());
+            let firstMessage = "Are you in love?";
+            $("#chatbox").html(`<p class="botText"><span class=uText-label>Them:&nbsp;</span><span> ${firstMessage} </span></p>`);
+            basicMessage = $("#chatbox").html();
+        }
+        
     });
 
     let videoStream;
