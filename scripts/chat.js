@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Retrieves the response
     const postText = (postMessage) => {
-        console.log("postText");
         let userText = $("#textInput").val();
         $("#textInput").val(postMessage); //set the user input to whatever post message before the API call so it appears instantly, mainly for button-based messages
         if (userText) {
